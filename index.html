@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-en="The Outside Builder — From Zero to Website Portfolio" data-cn="门外建造者 — 从零到站群">The Outside Builder — From Zero to Website Portfolio</title>
+<meta name="description" data-en="A non-coder from China building English niche websites with AI. Real numbers, real stories, real portfolio." data-cn="一个不会编程的中国人，用AI做英文网站的真实记录。真实数字，真实故事，真实站群。">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0e0c;--bg2:#1a1815;--bg3:#24211d;--text:#e8e4de;--text2:#a09888;--accent:#e8913a;--accent2:#c47a2e;--green:#5a9e6f;--red:#bf4a4a;--blue:#5b8bbf}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:"Georgia","Palatino","Times New Roman",serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-weight:400;line-height:1.2}
+h1{font-size:clamp(2rem,5vw,4rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.4rem,3vw,2.2rem);margin-bottom:1.5rem}
+h3{font-size:clamp(1.1rem,2vw,1.4rem);margin-bottom:.6rem}
+p{max-width:65ch}
+.small{font-size:.85rem;color:var(--text2)}
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.section{padding:4rem 0}
+.section-dark{background:var(--bg2)}
+.section-darker{background:var(--bg3)}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,14,12,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(232,225,222,.08);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-size:1rem;color:var(--accent);text-decoration:none;letter-spacing:.05em}
+.nav-brand span{color:var(--text2)}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.85rem;transition:color .2s;font-family:-apple-system,sans-serif;letter-spacing:.02em}
+.nav-links a:hover{color:var(--text)}
+.nav-links .active,.lang-btn.active{color:var(--accent)!important}
+.lang-btn{background:none;border:1px solid rgba(232,225,222,.2);color:var(--text2);font-size:.7rem;padding:.2rem .5rem;border-radius:3px;cursor:pointer;margin-left:.3rem;font-family:-apple-system,sans-serif;transition:all .2s}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.hero{padding:8rem 0 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(232,145,58,.06),transparent 70%);pointer-events:none}
+.hero-label{display:inline-block;font-family:-apple-system,sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;border:1px solid rgba(232,145,58,.3);padding:.3rem .8rem;border-radius:3px}
+.hero h1{margin-bottom:.5rem}
+.hero h1 .highlight{color:var(--accent)}
+.sub{font-size:1rem;color:var(--text2);margin:1rem 0 2rem;line-height:1.6}
+.stats-row{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(232,225,222,.1)}
+.stat{font-family:-apple-system,sans-serif}
+.stat-num{font-size:1.8rem;font-weight:600;color:var(--accent);display:block}
+.stat-label{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.section-header{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid rgba(232,225,222,.08)}
+.section-num{font-family:-apple-system,sans-serif;font-size:.7rem;letter-spacing:.1em;color:var(--bg);background:var(--accent);padding:.2rem .6rem;border-radius:3px;line-height:1.4}
+.section-header h2{margin:0}
+.layer-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:-apple-system,sans-serif;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:3px;margin-bottom:1rem}
+.layer-red{color:#fff;background:var(--red)}
+.layer-amber{color:#fff;background:var(--accent2)}
+.layer-green{color:#fff;background:var(--green)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.portfolio-card{background:var(--bg3);border:1px solid rgba(232,225,222,.06);padding:1.8rem;border-radius:6px;transition:border-color .3s,transform .3s;position:relative}
+.portfolio-card:hover{border-color:rgba(232,145,58,.3);transform:translateY(-2px)}
+.portfolio-card .icon{font-size:2rem;margin-bottom:.5rem;display:block}
+.portfolio-card .status{position:absolute;top:1rem;right:1rem;font-family:-apple-system,sans-serif;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .6rem;border-radius:3px}
+.status-live{background:rgba(90,158,111,.2);color:var(--green)}
+.status-wip{background:rgba(232,145,58,.2);color:var(--accent)}
+.portfolio-card h3{font-size:1rem;margin-bottom:.3rem}
+.portfolio-card p{font-size:.85rem;color:var(--text2);margin-bottom:.8rem}
+.portfolio-card .link{color:var(--accent);text-decoration:none;font-size:.8rem;font-family:-apple-system,sans-serif}
+.portfolio-card .link:hover{text-decoration:underline}
+.diary-list{display:flex;flex-direction:column;gap:1rem}
+.diary-item{display:grid;grid-template-columns:80px 1fr;gap:1.2rem;padding:1.2rem 1.5rem;background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;transition:background .2s}
+.diary-item:hover{background:rgba(232,145,58,.06)}
+.diary-date{font-family:-apple-system,sans-serif;font-size:.75rem;color:var(--accent);padding-top:.15rem}
+.diary-content h4{font-size:.95rem;margin-bottom:.3rem}
+.diary-content p{font-size:.82rem;color:var(--text2);margin:0}
+.diary-tag{display:inline-block;font-family:-apple-system,sans-serif;font-size:.65rem;padding:.15rem .5rem;border-radius:3px;margin-top:.4rem;text-transform:uppercase;letter-spacing:.05em}
+.tag-build{background:rgba(232,145,58,.15);color:var(--accent)}
+.tag-numbers{background:rgba(90,158,111,.15);color:var(--green)}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.number-card{background:var(--bg2);padding:1.5rem;text-align:center;border-radius:6px;border:1px solid rgba(232,225,222,.06)}
+.number-card .big{font-size:2.2rem;font-weight:600;color:var(--accent);display:block}
+.number-card .label{font-size:.75rem;color:var(--text2);font-family:-apple-system,sans-serif;margin-top:.3rem}
+.featured-article{max-width:680px;padding:2rem;background:var(--bg3);border-radius:6px;border:1px solid rgba(232,225,222,.06);margin:0 auto}
+.featured-article .meta{font-size:.75rem;color:var(--text2);font-family:-apple-system,sans-serif;margin-bottom:.5rem}
+.featured-article h3{font-size:1.3rem;margin-bottom:.8rem}
+.featured-article h3 a{color:var(--text);text-decoration:none}
+.featured-article h3 a:hover{color:var(--accent)}
+.featured-article p{font-size:.9rem;margin-bottom:1rem}
+.read-more{color:var(--accent);text-decoration:none;font-size:.85rem}
+.read-more:hover{text-decoration:underline}
+.cta{text-align:center;padding:4rem 1.5rem;background:linear-gradient(135deg,rgba(232,145,58,.06),transparent);border-top:1px solid rgba(232,145,58,.15);border-bottom:1px solid rgba(232,145,58,.15)}
+.cta h2{margin-bottom:.5rem}
+.cta p{color:var(--text2);margin:0 auto 1.5rem}
+.btn{display:inline-block;background:var(--accent);color:var(--bg);padding:.7rem 1.8rem;border-radius:4px;text-decoration:none;font-family:-apple-system,sans-serif;font-size:.85rem;font-weight:500;transition:opacity .2s;border:none;cursor:pointer}
+.btn:hover{opacity:.85}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--text2)}
+.btn-outline:hover{background:var(--bg3);opacity:1}
+.footer{padding:3rem 1.5rem 1.5rem;border-top:1px solid rgba(232,225,222,.06)}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:2rem}
+.footer-col h4{font-size:.85rem;color:var(--text);margin-bottom:.8rem;font-family:-apple-system,sans-serif}
+.footer-col a,.footer-col p{font-size:.8rem;color:var(--text2);text-decoration:none;display:block;margin-bottom:.4rem}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid rgba(232,225,222,.06);font-size:.75rem;color:var(--text2)}
+@media(max-width:768px){.nav-links{display:none}.hero{padding:6rem 0 2.5rem}.stats-row{gap:1rem}.stat-num{font-size:1.4rem}.portfolio-grid{grid-template-columns:1fr}.diary-item{grid-template-columns:1fr;gap:.5rem;padding:1rem}.diary-date{font-size:.7rem}.section{padding:2.5rem 0}.numbers-grid{grid-template-columns:1fr 1fr}.featured-article{padding:1.5rem}}
+@media(max-width:480px){.numbers-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">⟐ <span data-en="The Outside" data-cn="门外">The Outside</span> <span data-en="Builder" data-cn="建造者">Builder</span></a>
+  <div style="display:flex;align-items:center">
+    <div class="nav-links">
+      <a href="index.html" class="active" data-en="Home" data-cn="首页">Home</a>
+    </div>
+    <div style="margin-left:1.2rem">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <button class="lang-btn" data-lang="cn" onclick="switchLang('cn')">中文</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="hero-label" data-en="A Real-Time Build Diary" data-cn="实时建造日记">A Real-Time Build Diary</span>
+    <h1><span data-en="Building an English Website&nbsp;Portfolio" data-cn="用AI建英文站群">Building an English Website&nbsp;Portfolio</span><br><span class="highlight" data-en="from Scratch, with AI" data-cn="从零开始">from Scratch, with AI</span></h1>
+    <p class="sub" data-en="I'm not a coder. English isn't my first language. But I'm building a real portfolio of niche websites — and publishing every step, every mistake, and every number along the way." data-cn="我不会编程。英语不是母语。但我正在搭建一个真正的英文利基站群——每一步、每个错误、每笔数字，都公开发布。">I'm not a coder. English isn't my first language. But I'm building a real portfolio of niche websites — and publishing every step, every mistake, and every number along the way.</p>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label" data-en="Sites Built" data-cn="已建站点">Sites Built</span></div>
+      <div class="stat"><span class="stat-num">2</span><span class="stat-label" data-en="Live Sites" data-cn="线上运行">Live Sites</span></div>
+      <div class="stat"><span class="stat-num">2</span><span class="stat-label" data-en="In Progress" data-cn="正在开发">In Progress</span></div>
+      <div class="stat"><span class="stat-num">0</span><span class="stat-label" data-en="Code Experience" data-cn="编程经验">Code Experience</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="portfolio">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" data-en="LAYER 01" data-cn="第一层">LAYER 01</span>
+      <h2 data-en="The Portfolio — What I've Built So Far" data-cn="站群 — 我已经建了什么">The Portfolio — What I've Built So Far</h2>
+    </div>
+    <span class="layer-badge layer-red"><span data-en="⬤ Active Projects" data-cn="⬤ 活跃项目">⬤ Active Projects</span></span>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <span class="icon">🍜</span><span class="status status-live" data-en="◉ Live" data-cn="◉ 线上">◉ Live</span>
+        <h3 data-en="Chinese Food Guide" data-cn="中文美食指南">Chinese Food Guide</h3>
+        <p data-en="A bilingual food destination guide covering regional Chinese cuisine, written for an English-speaking audience." data-cn="面向英文读者的中国地方美食双语导览。">A bilingual food destination guide covering regional Chinese cuisine.</p>
+        <a href="https://food.eastculture.top" target="_blank" rel="noopener" class="link"><span data-en="Visit site →" data-cn="访问 →">Visit site →</span></a>
+      </div>
+      <div class="portfolio-card">
+        <span class="icon">🏯</span><span class="status status-live" data-en="◉ Live" data-cn="◉ 线上">◉ Live</span>
+        <h3 data-en="East City Tourism" data-cn="东方城市旅游">East City Tourism</h3>
+        <p data-en="Bilingual city travel guides for China, designed to help English-speaking travelers discover hidden gems." data-cn="面向英文旅行者的中国城市双语旅行指南。">Bilingual city travel guides for China.</p>
+        <a href="https://travel.eastculture.top" target="_blank" rel="noopener" class="link"><span data-en="Visit site →" data-cn="访问 →">Visit site →</span></a>
+      </div>
+      <div class="portfolio-card">
+        <span class="icon">💪</span><span class="status status-wip" data-en="◉ WIP" data-cn="◉ 开发中">◉ WIP</span>
+        <h3 data-en="FitHer" data-cn="FitHer">FitHer</h3>
+        <p data-en="Science-based weight loss resource for Western women. Built with AI, backed by real research citations." data-cn="面向欧美女性的科学减脂站。AI搭建，真实研究引用。">Science-based weight loss resource for Western women.</p>
+        <a href="https://ai.aichatmail.one" class="link"><span data-en="Preview →" data-cn="预览 →">Preview →</span></a>
+      </div>
+      <div class="portfolio-card">
+        <span class="icon">✉️</span><span class="status status-live" data-en="◉ Live" data-cn="◉ 线上">◉ Live</span>
+        <h3 data-en="Temp Mail" data-cn="临时邮箱">Temp Mail</h3>
+        <p data-en="A privacy-first disposable email service — zero logging, fully functional." data-cn="隐私优先的临时邮箱服务——无日志，功能完整。">A privacy-first disposable email service.</p>
+        <a href="https://aichatmail.one" target="_blank" rel="noopener" class="link"><span data-en="Visit site →" data-cn="访问 →">Visit site →</span></a>
+      </div>
+      <div class="portfolio-card">
+        <span class="icon">🤖</span><span class="status status-live" data-en="◉ Live" data-cn="◉ 线上">◉ Live</span>
+        <h3 data-en="AI & Earthlings" data-cn="AI与地球人">AI & Earthlings</h3>
+        <p data-en="This site (previous version). 24 articles on future trends, AI-written and bilingual." data-cn="本站旧版。24篇AI写的中英双语未来趋势文章。">This site (previous version). 24 articles on future trends.</p>
+      </div>
+      <div class="portfolio-card" style="border-style:dashed">
+        <span class="icon">···</span><span class="status status-wip">● <span data-en="Next" data-cn="下一个">Next</span></span>
+        <h3 data-en="The Next One" data-cn="下一个站点">The Next One</h3>
+        <p data-en="Currently researching. Health tracker? Productivity tool? Stay tuned — I'll document the full process." data-cn="正在调研中。健康追踪器？生产力工具？敬请期待——全程记录。">Currently researching. The full process will be documented.</p>
+        <span style="font-size:.8rem;color:var(--text2);font-family:-apple-system,sans-serif" data-en="Coming soon" data-cn="即将到来">Coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="diary">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" data-en="LAYER 02" data-cn="第二层">LAYER 02</span>
+      <h2 data-en="The Build Diary — Serial Stories" data-cn="建造日记 — 连载故事">The Build Diary — Serial Stories</h2>
+    </div>
+    <span class="layer-badge layer-amber"><span data-en="⬤ Ongoing Series — New Posts Monthly" data-cn="⬤ 连载中 — 每月更新">⬤ Ongoing Series — New Posts Monthly</span></span>
+    <p class="small" style="margin-bottom:1.5rem" data-en="Every post is part of a series. Read in order, or jump in anywhere. New content drops each month." data-cn="每篇文章都是系列的一部分。可以按顺序读，也可以随时加入。每月更新。">Every post is part of a series. Read in order, or jump in anywhere. New content drops each month.</p>
+    <div class="diary-list">
+      <div class="diary-item">
+        <div class="diary-date" data-en="May<br>2026" data-cn="2026年5月">May<br>2026</div>
+        <div class="diary-content">
+          <h4 data-en="Issue #1: Why I'm Building English Websites from China" data-cn="第1期：为什么我在中国做英文网站">Issue #1: Why I'm Building English Websites from China</h4>
+          <p data-en="The origin story. Zero coding experience, a day job, and a decision to build an English website portfolio from scratch. The motivation, the tools, and what I hope to prove." data-cn="起源故事。零编程经验，有全职工作，决定从零搭建英文站群。动机、工具、以及我想证明什么。">The origin story. Zero coding experience, a day job, and a decision to build an English website portfolio.</p>
+          <span class="diary-tag tag-build" data-en="Build Diary" data-cn="建造日记">Build Diary</span>
+        </div>
+      </div>
+      <div class="diary-item">
+        <div class="diary-date" data-en="May<br>2026" data-cn="2026年5月">May<br>2026</div>
+        <div class="diary-content">
+          <h4 data-en="Issue #2: The AI Toolchain That Powers Everything" data-cn="第2期：驱动一切的AI工具链">Issue #2: The AI Toolchain That Powers Everything</h4>
+          <p data-en="My complete AI workflow — from idea validation to content generation to deployment. The exact prompts, tools, and processes I use to build a site from zero." data-cn="完整的AI工作流——从想法验证到内容生成到部署。我用来从零建站的具体提示词、工具和流程。">My complete AI workflow — from idea to deployment. The exact prompts, tools, and processes.</p>
+          <span class="diary-tag tag-build" data-en="Build Diary" data-cn="建造日记">Build Diary</span>
+        </div>
+      </div>
+      <div class="diary-item">
+        <div class="diary-date" data-en="May<br>2026" data-cn="2026年5月">May<br>2026</div>
+        <div class="diary-content">
+          <h4 data-en="Issue #3: First Month Numbers" data-cn="第3期：首月数据">Issue #3: First Month Numbers</h4>
+          <p data-en="Traffic data from all live sites. Which sites are getting organic traffic, which aren't. Real numbers, not screenshots from someone else's dashboard." data-cn="所有在线站点的流量数据。哪些站有自然流量，哪些没有。真实数字，不是别人控制面板的截图。">Traffic data from all live sites. Real numbers, not screenshots from someone else's dashboard.</p>
+          <span class="diary-tag tag-numbers" data-en="Numbers" data-cn="数据">Numbers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-darker" id="numbers">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" data-en="LAYER 03" data-cn="第三层">LAYER 03</span>
+      <h2 data-en="By the Numbers — No BS, Just Data" data-cn="数字说话 — 不吹牛，只有数据">By the Numbers — No BS, Just Data</h2>
+    </div>
+    <span class="layer-badge layer-green"><span data-en="⬤ Updated Quarterly" data-cn="⬤ 季度更新">⬤ Updated Quarterly</span></span>
+    <p class="small" style="margin-bottom:1.5rem" data-en="I don't sell courses. I don't sell templates. I just build and publish the results. Here's where we stand." data-cn="我不卖课，不卖模板。我只是建站并公布结果。目前就是这样。">I don't sell courses. I don't sell templates. I just build and publish the results.</p>
+    <div class="numbers-grid">
+      <div class="number-card"><span class="big">~$0</span><span class="label" data-en="Revenue (building phase)" data-cn="收入（建设期）">Revenue (building phase)</span></div>
+      <div class="number-card"><span class="big">2</span><span class="label" data-en="Indexed Sites (Google)" data-cn="被Google收录">Indexed Sites (Google)</span></div>
+      <div class="number-card"><span class="big">24</span><span class="label" data-en="Articles Published" data-cn="已发文章">Articles Published</span></div>
+      <div class="number-card"><span class="big">3</span><span class="label" data-en="Months In" data-cn="已做几个月">Months In</span></div>
+      <div class="number-card"><span class="big">6</span><span class="label" data-en="Sites (Inc. WIP)" data-cn="站点（含开发中）">Sites (Inc. WIP)</span></div>
+      <div class="number-card"><span class="big">100%</span><span class="label" data-en="AI-Assisted Content" data-cn="AI辅助内容">AI-Assisted Content</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="latest">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num" data-en="LATEST" data-cn="最新">LATEST</span>
+      <h2 data-en="Featured Post — Issue #1" data-cn="精选文章 — 第1期">Featured Post — Issue #1</h2>
+    </div>
+    <div class="featured-article">
+      <p class="meta" data-en="Build Diary · May 2026 · 8 min read" data-cn="建造日记 · 2026年5月 · 阅读约8分钟">Build Diary · May 2026 · 8 min read</p>
+      <h3><a href="#" data-en="Why I'm Building English Websites from China (with AI, Without Coding)" data-cn="为什么我在中国用AI做英文网站（不会编程）">Why I'm Building English Websites from China (with AI, Without Coding)</a></h3>
+      <p data-en="I have a day job. I don't know how to code. English is my second language. And I'm building a portfolio of English-language niche websites using nothing but AI tools. This is why — and what happens next." data-cn="我有全职工作。我不会编程。英语是我的第二语言。而我正在用AI工具搭建一个英文利基站群。这是为什么——以及接下来会发生什么。">I have a day job. I don't know how to code. English is my second language. Yet I'm building a portfolio of English niche websites with AI.</p>
+      <a href="#" class="read-more"><span data-en="Read full post →" data-cn="阅读全文 →">Read full post →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2 data-en="Follow the Journey" data-cn="关注旅程">Follow the Journey</h2>
+    <p data-en="No newsletter — I don't collect emails. Just bookmark the site and check back. New posts drop monthly." data-cn="没有邮件订阅——我不收集邮箱。收藏本站，每月回来看看。每月更新。">No newsletter — I don't collect emails. Just bookmark the site and check back monthly.</p>
+    <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+      <a href="#diary" class="btn"><span data-en="Read Build Diary" data-cn="阅读建造日记">Read Build Diary</span></a>
+      <a href="#portfolio" class="btn btn-outline"><span data-en="View Portfolio" data-cn="查看站群">View Portfolio</span></a>
+      <a href="https://x.com/fither" target="_blank" rel="noopener" class="btn btn-outline"><span data-en="Follow on X" data-cn="关注X">Follow on X</span></a>
+    </div>
+    <p class="small" style="margin-top:1.5rem" data-en="No ads. No affiliate links. No sponsored content. Just the real story." data-cn="无广告。无联盟链接。无赞助内容。只有真实故事。">No ads. No affiliate links. No sponsored content. Just the real story.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 data-en="The Outside Builder" data-cn="门外建造者">The Outside Builder</h4>
+        <p data-en="Real portfolio, real numbers, real journey. Built with ❤️ and AI." data-cn="真实站群，真实数据，真实旅程。用❤️和AI搭建。">Real portfolio, real numbers, real journey.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Navigate" data-cn="导航">Navigate</h4>
+        <a href="index.html" data-en="Home" data-cn="首页">Home</a>
+        <a href="#portfolio" data-en="Portfolio" data-cn="站群">Portfolio</a>
+        <a href="#diary" data-en="Build Diary" data-cn="建造日记">Build Diary</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Sister Sites" data-cn="姊妹站">Sister Sites</h4>
+        <a href="https://food.eastculture.top" target="_blank" rel="noopener" data-en="🍜 Chinese Food Guide" data-cn="🍜 中文美食指南">🍜 Chinese Food Guide</a>
+        <a href="https://travel.eastculture.top" target="_blank" rel="noopener" data-en="🏯 East City Tourism" data-cn="🏯 东方城市旅游">🏯 East City Tourism</a>
+        <a href="https://aichatmail.one" target="_blank" rel="noopener" data-en="✉️ Temp Mail" data-cn="✉️ 临时邮箱">✉️ Temp Mail</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-en="© 2026 The Outside Builder. No data collected. No tracking." data-cn="© 2026 门外建造者。不收集数据。无追踪。">© 2026 The Outside Builder. No data collected. No tracking.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Language switching
+function switchLang(lang) {
+  document.querySelectorAll('[data-'+lang+']').forEach(el => {
+    if (el.tagName === 'TITLE') { document.title = el.getAttribute('data-'+lang); return }
+    el.textContent = el.getAttribute('data-'+lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.documentElement.lang = lang === 'cn' ? 'zh' : 'en';
+}
+// Click hamburger placeholder for mobile
+document.querySelector('.nav-brand')?.addEventListener('click', function(e){
+  const links = document.querySelector('.nav-links');
+  if (window.innerWidth <= 768) { links.style.display = links.style.display === 'flex' ? 'none' : 'flex'; }
+});
+</script>
+</body>
+</html>
